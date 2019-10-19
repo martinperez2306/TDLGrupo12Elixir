@@ -35,3 +35,22 @@ IO.puts(is_boolean(:false));
 #Los alias son cosas que se pueden construir con mayus al inicio. Tambien son atomos.
 Hello
 IO.puts(is_atom(Hello))
+
+#Strings
+#Los strings son cadenas de caracteres y estan representados por el tipo BINARIO. Se usa con ""
+IO.puts(is_binary("Hello"))
+IO.puts(byte_size("Hello"))
+
+#Para concatenar strings o binarios se usa <>
+saludo = "Hello" <> "World"
+IO.puts(saludo)
+
+#Charlist. Son listas de caracteres. Se usa con ''
+to_charlist "hello"
+#'hello'
+to_string 'hello'
+#"hello"
+to_string :hello
+#"hello"
+to_string 1
+#"1"
