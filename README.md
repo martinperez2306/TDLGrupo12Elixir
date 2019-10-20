@@ -21,3 +21,8 @@ Para nuestro proyecto de Chat usaremos el manejador de proyecto de Mix
 	* Manejador de Ambientes
 	* Compilacion y Pruebas
 	* Aplicaciones
+
+## Ambientes de Mix
+  * DEV: Nuestro para trabajar y compilar
+  * TEST: Compila los codigos para pruebas y luego ejecutar
+  * PROD: Para la muestra
