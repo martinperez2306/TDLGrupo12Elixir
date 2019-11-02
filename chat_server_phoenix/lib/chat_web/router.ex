@@ -5,7 +5,6 @@ defmodule ChatWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
-    plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
 
@@ -17,6 +16,8 @@ defmodule ChatWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/home", HomeController, :index
+    post "/login", LoginController, :handler
   end
 
   # Other scopes may use custom stacks.

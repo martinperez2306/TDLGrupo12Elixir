@@ -33,6 +33,13 @@ defmodule ChatWeb.RoomChannel do
     {:noreply, socket}
   end
 
+  def handle_in("loggin", payload, socket) do
+    broadcast socket, "loggin", payload
+    IO.puts(payload)
+    {:noreply, socket}
+  end
+
+
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true
