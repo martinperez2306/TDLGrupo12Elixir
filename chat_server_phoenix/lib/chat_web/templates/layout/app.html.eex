@@ -7,6 +7,9 @@
     <title>Chat · Phoenix Framework</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="icon" type="image/png" href="<%= Routes.static_path(@conn, "/images/icons/favicon.ico") %>"/>
+
+    <script src="<%= Routes.static_path(@conn, "/vendor/jquery/jquery-3.2.1.min.js") %>"></script>
+    
 	  <link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/vendor/bootstrap/css/bootstrap.min.css") %>">
 	  <link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/fonts/font-awesome-4.7.0/css/font-awesome.min.css") %>">
 	  <link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/vendor/animate/animate.css") %>">	
@@ -27,8 +30,7 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-    <script src="<%= Routes.static_path(@conn, "/vendor/jquery/jquery-3.2.1.min.js") %>"></script>
-	  <script src="<%= Routes.static_path(@conn, "/vendor/bootstrap/js/popper.js") %>"></script>
+    <script src="<%= Routes.static_path(@conn, "/vendor/bootstrap/js/popper.js") %>"></script>
 	  <script src="<%= Routes.static_path(@conn, "/vendor/bootstrap/js/bootstrap.min.js") %>"></script>
 	  <script src="<%= Routes.static_path(@conn, "/vendor/select2/select2.min.js") %>"></script>
 	  <script src="<%= Routes.static_path(@conn, "/vendor/tilt/tilt.jquery.min.js") %>"></script>

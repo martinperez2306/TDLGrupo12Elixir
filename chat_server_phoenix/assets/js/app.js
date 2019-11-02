@@ -18,24 +18,21 @@ btn.addEventListener('click', function () {
   let pass = document.getElementById('pass');        // list of messages.
   let email = document.getElementById('email');   
   if (pass.value.length > 0 && email.value.length > 0) { // don't sent empty msg.
-    const url = "http://localhost:4000/login";
-    fetch(url, {
-        method : "POST",
-        body : JSON.stringify({
-            email : email.value,
-            pass : pass.value
-         })
-    }).then(function(html) {
-      // Initialize the DOM parser
-      var parser = new DOMParser();
-
-      // Parse the text
-      var doc = parser.parseFromString(html, "text/html");
-
-      // You can now even select part of that html as you would in the regular DOM 
-      // Example:
-      // var docArticle = doc.querySelector('article').innerHTML;
-
-      console.log(doc);
-    });
+    $.ajax({
+      'type': 'POST',
+      'url': 'http://localhost:4000/login',
+      'data': { 
+        email : email.value,
+        pass : pass.value},
+      'success': function(response)
+       {
+        $("html").html(response);
+       },
+       'error': function(jqXHR, textStatus, errorThrown)
+       {
+           console.log('Error on saving appointment:', jqXHR, textStatus, errorThrown);    
+       }
+   });
 }});  
+
+
