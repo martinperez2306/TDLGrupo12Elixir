@@ -6,26 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Chat · Phoenix Framework</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-	<script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <link rel="icon" type="image/png" href="<%= Routes.static_path(@conn, "/images/icons/favicon.ico") %>"/>
+	  <link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/vendor/bootstrap/css/bootstrap.min.css") %>">
+	  <link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/fonts/font-awesome-4.7.0/css/font-awesome.min.css") %>">
+	  <link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/vendor/animate/animate.css") %>">	
+	  <link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/vendor/css-hamburgers/hamburgers.min.css") %>">
+	  <link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/vendor/select2/select2.min.css") %>">
+  	<link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/css/util.css") %>">
+	  <link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/css/main.css") %>">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-          </ul>
-        </nav>
-        <a href="http://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
+      
+      
     </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
     </main>
-    
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script src="<%= Routes.static_path(@conn, "/vendor/jquery/jquery-3.2.1.min.js") %>"></script>
+	  <script src="<%= Routes.static_path(@conn, "/vendor/bootstrap/js/popper.js") %>"></script>
+	  <script src="<%= Routes.static_path(@conn, "/vendor/bootstrap/js/bootstrap.min.js") %>"></script>
+	  <script src="<%= Routes.static_path(@conn, "/vendor/select2/select2.min.js") %>"></script>
+	  <script src="<%= Routes.static_path(@conn, "/vendor/tilt/tilt.jquery.min.js") %>"></script>
+	  <script >
+		    $('.js-tilt').tilt({
+		    	scale: 1.1
+		    })
+	  </script>
   </body>
 </html>

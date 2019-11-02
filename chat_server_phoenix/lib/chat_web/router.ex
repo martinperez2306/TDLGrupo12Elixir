@@ -2,7 +2,7 @@ defmodule ChatWeb.Router do
   use ChatWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html http "]
     plug :fetch_session
     plug :fetch_flash
     plug :put_secure_browser_headers
