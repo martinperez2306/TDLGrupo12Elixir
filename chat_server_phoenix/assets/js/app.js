@@ -9,17 +9,33 @@
 // Import dependencies
 //
 import "phoenix_html"
+console.log("gesdd")       // name of message sender
+let btn = document.getElementById('loginBtn');
 
-let pass = document.getElementById('pass');        // list of messages.
-let email = document.getElementById('email');          // name of message sender
-let msg = document.getElementById('loginBtn');            // message input field
 
-// "listen" for the [Enter] keypress event to send a message:
-msg.addEventListener('keypress', function (event) {
-  if ( name.length > 0) { // don't sent empty msg.
-    $.post( "http://localhost:4000/login", { email: email, pass: pass } );
-    console.log("sended");
-    pass.value = '';
-    name.value = '';         // reset the message input field for next message.
-  }
-});
+btn.addEventListener('click', function () {
+  
+  let pass = document.getElementById('pass');        // list of messages.
+  let email = document.getElementById('email');   
+  if (pass.value.length > 0 && email.value.length > 0) { // don't sent empty msg.
+    const url = "http://localhost:4000/login";
+    fetch(url, {
+        method : "POST",
+        body : JSON.stringify({
+            email : email.value,
+            pass : pass.value
+         })
+    }).then(function(html) {
+      // Initialize the DOM parser
+      var parser = new DOMParser();
+
+      // Parse the text
+      var doc = parser.parseFromString(html, "text/html");
+
+      // You can now even select part of that html as you would in the regular DOM 
+      // Example:
+      // var docArticle = doc.querySelector('article').innerHTML;
+
+      console.log(doc);
+    });
+}});  
