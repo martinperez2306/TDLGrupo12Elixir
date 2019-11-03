@@ -1,1 +1,1 @@
-mix phx.gen.schema Lobbie lobbies name:string enable:boolean --binary-id
+mix phx.gen.schema Lobby lobbies name:string enable:boolean --binary-id

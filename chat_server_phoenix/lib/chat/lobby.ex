@@ -1,4 +1,4 @@
-defmodule Chat.Lobbie do
+defmodule Chat.Lobby do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -12,13 +12,13 @@ defmodule Chat.Lobbie do
   end
 
   @doc false
-  def changeset(lobbie, attrs) do
+  def changeset(lobby, attrs) do
     lobbie
     |> cast(attrs, [:name, :enable])
     |> validate_required([:name, :enable])
   end
 
   def get_lobbies() do
-    Chat.Repo.all(Chat.Lobbie)
+    Chat.Repo.all(Chat.Lobby)
   end
 end

@@ -27,6 +27,14 @@ defmodule ChatWeb.Router do
     get "/", PageController, :lobbies
   end
 
+  scope "/lobbies", Chat do
+    pipe_throug :broser
+
+    put "/lobbies", LobbieController, :create
+  end
+
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", ChatWeb do
   #   pipe_through :api
