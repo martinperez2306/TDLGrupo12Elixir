@@ -17,7 +17,7 @@ defmodule ChatWeb.Router do
 
     get "/", PageController, :index
     get "/home", HomeController, :index
-    post "/login", LoginController, :handler
+    post "/login", LoginController, :login
     put "/login", LoginController, :create
   end
 

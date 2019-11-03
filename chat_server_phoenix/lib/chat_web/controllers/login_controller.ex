@@ -5,14 +5,16 @@ defmodule ChatWeb.LoginController do
     render(conn, "index.html")
   end
 
-
-
-  def handler(conn, params) do
+  def login(conn, params) do
     {:ok, data, _conn_details} = Plug.Conn.read_body(conn) #Decoe from body
 
-    # TODO - CRUD email
-    redirect(conn, to: "/home")
-
+    case {Chat.User.get(data)} do
+      {nil} -> # if the user doesn`t exist
+        json conn |> put_status(:bad_request), %{errors: ["Invalid Password"] }
+      {user} -> # otherwise redirect to home
+        IO.inspect(user)
+        redirect(conn, to: "/home")
+      end
   end
 
   def create(conn, params) do

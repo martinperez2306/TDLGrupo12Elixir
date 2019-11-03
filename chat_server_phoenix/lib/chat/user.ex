@@ -23,6 +23,20 @@ defmodule Chat.User do
     |> Chat.User.changeset(attrs)
     |> Chat.Repo.insert()
   end
+
+  def get(attrs \\ %{}) do
+    # convert from string struct to atom struct
+    user = for {key, val} <- Jason.decode!(attrs), into: %{}, do: {String.to_atom(key), val}
+    pass = user.pass
+
+    # Get from repo the user
+    case Chat.Repo.get_by(Chat.User, email: user.email) do
+      nil -> Chat.User.create(attrs)
+      %Chat.User{email: email, pass: ^pass} -> user
+      _ -> nil
+    end
+
+  end
 end
 
 
