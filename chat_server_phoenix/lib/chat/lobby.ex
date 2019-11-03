@@ -13,7 +13,7 @@ defmodule Chat.Lobby do
 
   @doc false
   def changeset(lobby, attrs) do
-    lobbie
+    lobby
     |> cast(attrs, [:name, :enable])
     |> validate_required([:name, :enable])
   end
