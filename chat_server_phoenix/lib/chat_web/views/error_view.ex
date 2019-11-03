@@ -1,3 +1,5 @@
+# Este modulo es el responzable de resolver la vista de
+# los errores del ChatServer
 defmodule ChatWeb.ErrorView do
   use ChatWeb, :view
 
