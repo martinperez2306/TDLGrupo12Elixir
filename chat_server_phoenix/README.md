@@ -7,6 +7,10 @@ To start your Phoenix server:
   * Install Node.js dependencies with `cd assets && npm install`
   * Start Phoenix endpoint with `mix phx.server`
 
+
+To add schemmas user
+  * mix phx.gen.schema User user email:string pass:string
+
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).

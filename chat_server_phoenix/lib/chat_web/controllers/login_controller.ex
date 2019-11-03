@@ -15,16 +15,15 @@ defmodule ChatWeb.LoginController do
 
   end
 
-  #
-  # def create(conn, params) do
-  #   changeset = Chat.User.changeset(
-  #     %Chat.User{}, params)case Repo.insert(changeset) do
-  #     {:ok, user} ->
-  #       json conn |> put_status(:created), user
-  #     {:error, _changeset} ->
-  #       json conn |> put_status(:bad_request), %{errors: ["unable to create user"] }
-  #   end
-  # end
+  def create(conn, params) do
+    changeset = Chat.User.changeset(%Chat.User{}, params)
+    case Chat.Repo.insert(changeset) do
+      {:ok, user} ->
+        json conn |> put_status(:created), user
+      {:error, _changeset} ->
+        json conn |> put_status(:bad_request), %{errors: ["unable to create user"] }
+    end
+  end
 
   # def update(conn, %{"email" => email} = params) do
   #   user = Repo.get(Chat.User, email)

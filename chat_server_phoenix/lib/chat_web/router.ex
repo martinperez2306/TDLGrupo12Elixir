@@ -18,6 +18,7 @@ defmodule ChatWeb.Router do
     get "/", PageController, :index
     get "/home", HomeController, :index
     post "/login", LoginController, :handler
+    put "/login", LoginController, :create
   end
 
   # Other scopes may use custom stacks.
