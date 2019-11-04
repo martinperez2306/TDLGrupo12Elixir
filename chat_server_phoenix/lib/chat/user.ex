@@ -3,8 +3,6 @@ defmodule Chat.User do
   import Ecto.Changeset
   @derive {Jason.Encoder, only: [:email, :pass]}
 
-  @primary_key {:id, :id, autogenerate: true}
-  @foreign_key_type :id
   schema "users" do
     field :email, :string
     field :pass, :string
@@ -18,4 +16,25 @@ defmodule Chat.User do
     |> cast(attrs, [:email, :pass])
     |> validate_required([:email, :pass])
   end
+
+  def create(attrs \\ %{}) do
+    attrs = Jason.decode!(attrs)
+    %Chat.User{}
+    |> Chat.User.changeset(attrs)
+    |> Chat.Repo.insert()
+  end
+
+  def get(attrs \\ %{}) do
+    # convert from string struct to atom struct
+    user = for {key, val} <- Jason.decode!(attrs), into: %{}, do: {String.to_atom(key), val}
+    pass = user.pass
+
+    # Get from repo the user
+    case Chat.Repo.get_by(Chat.User, email: user.email) do
+      nil -> Chat.User.create(attrs)
+      %Chat.User{email: email, pass: ^pass} -> user
+      _ -> nil
+    end
+  end
+
 end
