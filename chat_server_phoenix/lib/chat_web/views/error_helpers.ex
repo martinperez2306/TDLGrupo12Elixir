@@ -1,3 +1,5 @@
+# Este modulo es el responzable de resolver la vista de
+# la ayuda para errores del ChatServer
 defmodule ChatWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
