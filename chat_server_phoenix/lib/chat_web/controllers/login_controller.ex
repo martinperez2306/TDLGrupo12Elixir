@@ -6,13 +6,18 @@ defmodule ChatWeb.LoginController do
   end
 
   def login(conn, params) do
-    {:ok, data, _conn_details} = Plug.Conn.read_body(conn) #Decoe from body
+    data = if params != %{} do # if come from web
+      {:ok, data} = Jason.encode(params)
+      data
+    else #else if come from postman
+      {:ok, data, _conn_details} = Plug.Conn.read_body(conn) #Decoe from body
+      data
+    end
 
     case {Chat.User.get(data)} do
       {nil} -> # if the user doesn`t exist
         json conn |> put_status(:bad_request), %{errors: ["Invalid Password"] }
       {user} -> # otherwise redirect to home
-        IO.inspect(user)
         redirect(conn, to: "/home")
       end
   end

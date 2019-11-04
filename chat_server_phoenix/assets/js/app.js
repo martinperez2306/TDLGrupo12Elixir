@@ -23,7 +23,8 @@ btn.addEventListener('click', function () {
       'url': 'http://localhost:4000/login',
       'data': { 
         email : email.value,
-        pass : pass.value},
+        pass : pass.value
+      },
       'success': function(response)
        {
         $("html").html(response);
