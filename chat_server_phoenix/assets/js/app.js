@@ -21,9 +21,11 @@ btn.addEventListener('click', function () {
     $.ajax({
       'type': 'POST',
       'url': 'http://localhost:4000/login',
+      'Content-Type': 'application/javascript',
       'data': { 
-        email : email.value,
-        pass : pass.value},
+        "email" : email.value,
+        "pass" : pass.value
+      },
       'success': function(response)
        {
         $("html").html(response);
