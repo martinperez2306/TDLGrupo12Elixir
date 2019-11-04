@@ -2,10 +2,9 @@ defmodule ChatWeb.Router do
   use ChatWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html http "]
     plug :fetch_session
     plug :fetch_flash
-    plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
 
@@ -17,6 +16,9 @@ defmodule ChatWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/home", HomeController, :index
+    post "/login", LoginController, :login
+    put "/login", LoginController, :create
   end
 
   scope "/lobbies", ChatWeb do

@@ -1,11 +1,10 @@
 defmodule Chat.Lobby do
   use Ecto.Schema
   import Ecto.Changeset
+  @derive {Jason.Encoder, only: [:id, :enable, :name]}
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "lobbies" do
-    field :enable, :boolean, default: false
+    field :enable, :boolean, default: true
     field :name, :string
 
     timestamps()
