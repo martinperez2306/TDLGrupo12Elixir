@@ -3,7 +3,7 @@ defmodule Chat.User do
   import Ecto.Changeset
   @derive {Jason.Encoder, only: [:email, :pass]}
 
-  schema "user" do
+  schema "users" do
     field :email, :string
     field :pass, :string
 

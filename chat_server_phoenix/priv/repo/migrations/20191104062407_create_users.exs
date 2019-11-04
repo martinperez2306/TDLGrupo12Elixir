@@ -3,7 +3,7 @@ defmodule Chat.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users, primary_key: false) do
-      add :id, :id, primary_key: true
+      add :id, :serial, primary_key: true
       add :email, :string
       add :pass, :string
 
