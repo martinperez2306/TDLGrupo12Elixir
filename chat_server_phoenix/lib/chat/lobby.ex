@@ -3,8 +3,6 @@ defmodule Chat.Lobby do
   import Ecto.Changeset
   @derive {Jason.Encoder, only: [:id, :enable, :name]}
 
-  @primary_key {:id, :id, autogenerate: true}
-  @foreign_key_type :id
   schema "lobbies" do
     field :enable, :boolean, default: true
     field :name, :string

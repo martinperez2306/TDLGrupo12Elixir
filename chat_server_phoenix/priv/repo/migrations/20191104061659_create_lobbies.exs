@@ -3,7 +3,7 @@ defmodule Chat.Repo.Migrations.CreateLobbies do
 
   def change do
     create table(:lobbies, primary_key: false) do
-      add :id, :id, primary_key: true
+      add :id, :serial, primary_key: true
       add :name, :string
       add :enable, :boolean, default: true, null: false
 
