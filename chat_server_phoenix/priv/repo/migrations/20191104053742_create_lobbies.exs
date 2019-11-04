@@ -3,9 +3,9 @@ defmodule Chat.Repo.Migrations.CreateLobbies do
 
   def change do
     create table(:lobbies, primary_key: false) do
-      add :id, :binary_id, primary_key: true
+      add :id, :id, primary_key: true
       add :name, :string
-      add :enable, :boolean, default: false, null: false
+      add :enable, :boolean, default: true, null: false
 
       timestamps()
     end
