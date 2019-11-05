@@ -1,6 +1,7 @@
 defmodule Chat.UserLobby do
   use Ecto.Schema
   import Ecto.Changeset
+  @derive {Jason.Encoder, only: [:user_id, :lobby_id]}
 
   schema "user_lobby" do
     field :user_id, :id
