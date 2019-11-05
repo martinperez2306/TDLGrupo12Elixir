@@ -16,4 +16,21 @@ defmodule Chat.UserLobby do
     |> cast(attrs, [])
     |> validate_required([])
   end
+
+  def get_users_lobbies() do
+    Chat.Repo.all(Chat.UserLobby)
+  end
+
+  def get_user_lobby(id) do
+    Chat.Repo.get!(Chat.UserLobby, id)
+  end
+
+  def get_user_lobbies(user_id) do
+    Chat.Repo.get_by!(Chat.UserLobby, [user_id: user_id])
+  end
+
+  def delete_bank(%UserLobby{} = user_lobby) do
+   Caht.Repo.delete(user_lobby)
+  end
+
 end
