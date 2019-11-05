@@ -1,12 +1,12 @@
-defmodule ChatWeb.UserLobbiesController do
+defmodule ChatWeb.UserController do
   use ChatWeb, :controller
 
-  def index(conn, _params) do
+  def lobbies(conn, _params) do
     user_lobbies = Chat.UserLobby.get_user_lobbies
     json conn, user_lobbies
   end
 
-  def create(conn, params) do
+  def create_lobby(conn, params) do
       changeset = Chat.UserLobby.changeset(%Chat.UserLobby{},params)
       case Chat.Repo.insert(changeset) do
         {:ok, _user_lobby} ->
@@ -16,7 +16,7 @@ defmodule ChatWeb.UserLobbiesController do
       end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete_lobby(conn, %{"id" => id}) do
     user_lobby = Chat.UserLobby.get_user_lobby(id,true)
     with {:ok, %Chat.UserLobby{}} <- Chat.UserLobby.delete_user_lobby(user_lobby) do
     send_resp(conn, :no_content, "")

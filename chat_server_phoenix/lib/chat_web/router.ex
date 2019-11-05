@@ -19,19 +19,22 @@ defmodule ChatWeb.Router do
     get "/home", HomeController, :index
     post "/login", LoginController, :login
     put "/login", LoginController, :create
-  end
-
-  scope "/lobbies", ChatWeb do
-    pipe_through :browser
-
-    get "/", PageController, :lobbies
+    get "/lobbies", PageController, :lobbies
   end
 
   scope "/api", ChatWeb do
     pipe_through :api
+
     get "/lobbies", LobbyController, :index
     post "/lobbies", LobbyController, :create
     delete "/lobbies/:id", LobbyController, :delete
+
+    get "/users", UserController, :index
+    get "/users/:id", UserController :show
+    post "/user/:id", UserController :create
+    get "/users/:id/lobbies", UserController :lobbies
+    post "/users/:id/lobbies", UserController :create_lobby
+    delete "/users/:id_user/lobbies/:id_lobby", UserController :delete_lobby
   end
 
   # Other scopes may use custom stacks.
