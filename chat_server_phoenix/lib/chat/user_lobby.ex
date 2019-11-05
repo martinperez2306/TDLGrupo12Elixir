@@ -29,7 +29,7 @@ defmodule Chat.UserLobby do
     Chat.Repo.get_by!(Chat.UserLobby, [user_id: user_id])
   end
 
-  def delete_bank(%UserLobby{} = user_lobby) do
+  def delete_bank(%Chat.UserLobby{} = user_lobby) do
    Caht.Repo.delete(user_lobby)
   end
 

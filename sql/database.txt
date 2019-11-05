@@ -1,3 +1,4 @@
-mix phx.gen.schema Lobby lobbies name:string enable:boolean --binary-id
-mix phx.gen.schema User users email:string pass:string --binary-id
+mix phx.gen.schema Message messages name:string message:string
+mix phx.gen.schema Lobby lobbies name:string enable:boolean
+mix phx.gen.schema User users email:string pass:string
 mix phx.gen.schema UserLobby user_lobby user_id:references:users lobby_id:references:lobbies
