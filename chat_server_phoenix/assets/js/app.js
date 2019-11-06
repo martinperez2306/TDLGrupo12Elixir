@@ -14,14 +14,14 @@ let btn = document.getElementById('loginBtn');
 
 function getId(response) {
 
-    let id_json = JSON.parse(response);
+    
 
     $.ajax({
       'type': 'GET',
       'url': 'http://localhost:4000/lobbies',
       'Content-Type': 'application/javascript',
       'data': {
-        "id" : id_json.id,
+        "id" : response.id,
       },
       'success': function(response)
        {
@@ -29,9 +29,10 @@ function getId(response) {
        },
        'error': function(jqXHR, textStatus, errorThrown)
        {
-           console.log('Error on saving appointment:', jqXHR, textStatus, errorThrown);
+          console.log('Error on saving appointment:', jqXHR, textStatus, errorThrown);
        }
-}
+    });
+};
 
 
 btn.addEventListener('click', function () {
