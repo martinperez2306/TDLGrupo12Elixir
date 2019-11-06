@@ -17,8 +17,8 @@ defmodule ChatWeb.LoginController do
     case {Chat.User.get(data)} do
       {nil} -> # if the user doesn`t exist
         json conn |> put_status(:bad_request), %{errors: ["Invalid Password"] }
-      {user} -> # otherwise redirect to home
-        redirect(conn, to: "/home")
+      {id} -> # otherwise redirect to home
+        json conn |> put_status(:ok), %{id: id}
       end
   end
 

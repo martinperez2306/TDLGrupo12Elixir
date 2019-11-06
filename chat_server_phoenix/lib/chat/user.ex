@@ -31,8 +31,10 @@ defmodule Chat.User do
 
     # Get from repo the user
     case Chat.Repo.get_by(Chat.User, email: user.email) do
-      nil -> Chat.User.create(attrs)
-      %Chat.User{ pass: ^pass} -> user
+      nil ->
+        Chat.User.create(attrs)
+        Chat.Repo.get_by(Chat.User, email: user.email).id
+      %Chat.User{id: id ,pass: ^pass} -> id
       _ -> nil
     end
 
