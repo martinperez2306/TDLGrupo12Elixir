@@ -2,6 +2,10 @@ defmodule ChatWeb.LobbyController do
   use ChatWeb, :controller
 
   def index(conn, _params) do
+    render(conn, "index.html")
+  end
+
+  def get(conn, _params) do
     lobbies = Chat.Lobby.get_lobbies |> Enum.map(&Map.take(&1,[:id, :name, :enable]))
     json conn, lobbies
   end

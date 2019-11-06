@@ -9,7 +9,7 @@
 // Import dependencies
 //
 import "phoenix_html"
-console.log("gesdd")       // name of message sender
+
 let btn = document.getElementById('loginBtn');
 
 function getId(response) {

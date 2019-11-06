@@ -15,16 +15,22 @@ defmodule ChatWeb.Router do
   scope "/", ChatWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
-    get "/home", HomeController, :index
-    post "/login", LoginController, :login
-    put "/login", LoginController, :create
+    get "/", LoginController, :index
+
+  end
+
+  scope "/login", ChatWeb do
+    pipe_through :browser
+
+    get "/", LoginController, :index
+    post "/", LoginController, :login
+    put "/", LoginController, :create
   end
 
   scope "/lobbies", ChatWeb do
     pipe_through :browser
 
-    get "/", PageController, :lobbies
+    get "/", LobbyController, :index
   end
 
   scope "/api", ChatWeb do
