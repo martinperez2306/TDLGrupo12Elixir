@@ -5,7 +5,7 @@
 			<div class="login100-pic js-tilt" data-tilt>
 				<img src="images/img-01.png" alt="IMG">
 			</div>
-			<div class="login100-form validate-form">
+			<div class="login100-form validate-form form">
 				<span class="login100-form-title">
 					Member Login
 				</span>

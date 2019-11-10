@@ -10,6 +10,7 @@ defmodule ChatWeb.Router do
 
   pipeline :api do
     plug(:accepts, ["json"])
+    plug :accepts, ["json"]
   end
 
   ### Utils Commands
