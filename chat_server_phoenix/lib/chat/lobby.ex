@@ -29,6 +29,11 @@ defmodule Chat.Lobby do
     Chat.Repo.get_by!(Chat.Lobby, [id: id, enable: enable])
   end
 
+  def create_lobby(params) do
+    changeset = Chat.Lobby.changeset(%Chat.Lobby{},params)
+    Chat.Repo.insert(changeset)
+  end
+
   def delete_lobby(%Chat.Lobby{} = lobby) do
     lobby = Ecto.Changeset.change lobby, enable: false
     case Chat.Repo.update lobby do

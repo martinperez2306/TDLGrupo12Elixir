@@ -17,20 +17,12 @@ defmodule Chat.UserLobby do
     |> validate_required([])
   end
 
-  def get_users() do
-    Chat.Repo.all(Chat.User)
-  end
-
-  def get_user() do
-    Chat.Repo.all(Chat.User)
-  end
-
   def get_users_lobbies() do
     Chat.Repo.all(Chat.UserLobby)
   end
 
-  def get_user_lobby(id) do
-    Chat.Repo.get!(Chat.UserLobby, id)
+  def get_user_lobby(user_id, lobby_id) do
+    Chat.Repo.get_by!(Chat.UserLobby, [user_id: user_id, lobby_id: lobby_id])
   end
 
   def get_user_lobbies(user_id) do

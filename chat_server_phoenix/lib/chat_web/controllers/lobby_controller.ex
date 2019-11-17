@@ -2,13 +2,12 @@ defmodule ChatWeb.LobbyController do
   use ChatWeb, :controller
 
   def index(conn, _params) do
-    lobbies = Chat.Lobby.get_lobbies
+    lobbies = Chat.Lobby.get_lobbies()
     json conn, lobbies
   end
 
   def create(conn, params) do
-      changeset = Chat.Lobby.changeset(%Chat.Lobby{},params)
-      case Chat.Repo.insert(changeset) do
+      case Chat.Lobby.create_lobby(params) do
         {:ok, _lobby} ->
           json conn |> put_status(:created),%{ok: "Successful Operation"}
           {:error, _changeset} ->
