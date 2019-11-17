@@ -6,20 +6,27 @@ defmodule ChatWeb.LoginController do
   end
 
   def login(conn, params) do
-    data = if params != %{} do # if come from web
-      {:ok, data} = Jason.encode(params)
-      data
-    else #else if come from postman
-      {:ok, data, _conn_details} = Plug.Conn.read_body(conn) #Decoe from body
-      data
-    end
+    # if come from web
+    # else if come from postman
+    data =
+      if params != %{} do
+        {:ok, data} = Jason.encode(params)
+        data
+      else
+        # Decoe from body
+        {:ok, data, _conn_details} = Plug.Conn.read_body(conn)
+        data
+      end
 
     case {Chat.User.get(data)} do
-      {nil} -> # if the user doesn`t exist
-        json conn |> put_status(:bad_request), %{errors: ["Invalid Password"] }
-      {id} -> # otherwise redirect to home
-        json conn |> put_status(:ok), %{id: id}
-      end
+      # if the user doesn`t exist
+      {nil} ->
+        json(conn |> put_status(:bad_request), %{errors: ["Invalid Password"]})
+
+      # otherwise redirect to home
+      {id} ->
+        json(conn |> put_status(:ok), %{id: id})
+    end
   end
 
   def create(conn, params) do
@@ -27,9 +34,10 @@ defmodule ChatWeb.LoginController do
 
     case Chat.User.create(data) do
       {:ok, user} ->
-        json conn |> put_status(:created), user
+        json(conn |> put_status(:created), user)
+
       {:error, _changeset} ->
-        json conn |> put_status(:bad_request), %{errors: ["unable to create user"] }
+        json(conn |> put_status(:bad_request), %{errors: ["unable to create user"]})
     end
   end
 
@@ -49,6 +57,5 @@ defmodule ChatWeb.LoginController do
   #                  %{errors: ["invalid user"] }
   #   end
   # end
-#
+  #
 end
-

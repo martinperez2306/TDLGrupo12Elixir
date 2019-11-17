@@ -9,7 +9,7 @@
 // Import dependencies
 //
 import "phoenix_html"
-console.log("gesdd")       // name of message sender
+
 let btn = document.getElementById('loginBtn');
 
 function getId(response) {
@@ -32,14 +32,17 @@ function getId(response) {
 };
 
 function login(email, pass){
+    var user = {
+        email: email,
+        pass: pass,
+    };
+
   $.ajax({
     'type': 'POST',
     'url': 'http://localhost:4000/login',
     'Content-Type': 'application/javascript',
-    'data': {
-      "email" : email,
-      "pass" : pass
-    },
+    'dataType': 'json',
+    'data': JSON.stringfy(user),
     'success': function(response)
      {
       getId(response);
@@ -57,5 +60,5 @@ btn.addEventListener('click', function () {
   if (pass.value.length > 0 && email.value.length > 0) { // don't sent empty msg.
    login(email.value, pass.value);
   }
-  
+
 });
