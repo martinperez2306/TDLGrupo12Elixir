@@ -41,9 +41,9 @@ defmodule ChatWeb.Router do
     #get "/users", UserController, :index
     #get "/users/:id", UserController, :show
     #post "/user/:id", UserController, :create
-    get ("/users/:id/lobbies", UserApiController, :lobbies)
-    post ("/users/:user_id/lobbies", UserApiController, :create_lobby)
-    delete ("/users/:user_id/lobbies/:lobby_id", UserApiController, :delete_lobby)
+    get("/users/:id/lobbies", UserApiController, :lobbies)
+    post("/users/:user_id/lobbies", UserApiController, :create_lobby)
+    delete("/users/:user_id/lobbies/:lobby_id", UserApiController, :delete_lobby)
   end
 
 end
