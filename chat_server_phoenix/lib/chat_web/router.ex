@@ -34,16 +34,16 @@ defmodule ChatWeb.Router do
 
   scope "/api", ChatWeb do
     pipe_through(:api)
-    get("/lobbies", LobbyController, :index)
-    post("/lobbies", LobbyController, :create)
-    delete("/lobbies/:id", LobbyController, :delete)
+    get("/lobbies", LobbyApiController, :index)
+    post("/lobbies", LobbyApiController, :create)
+    delete("/lobbies/:id", LobbyApiController, :delete)
     #Move create user logic to this controller
     #get "/users", UserController, :index
     #get "/users/:id", UserController, :show
     #post "/user/:id", UserController, :create
-    get ("/users/:id/lobbies", UserController, :lobbies)
-    post ("/users/:user_id/lobbies", UserController, :create_lobby)
-    delete ("/users/:user_id/lobbies/:lobby_id", UserController, :delete_lobby)
+    get ("/users/:id/lobbies", UserApiController, :lobbies)
+    post ("/users/:user_id/lobbies", UserApiController, :create_lobby)
+    delete ("/users/:user_id/lobbies/:lobby_id", UserApiController, :delete_lobby)
   end
 
 end

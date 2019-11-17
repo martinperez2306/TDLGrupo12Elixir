@@ -1,4 +1,4 @@
-defmodule ChatWeb.UserController do
+defmodule ChatWeb.UserApiController do
   use ChatWeb, :controller
 
   def lobbies(conn, _params) do
