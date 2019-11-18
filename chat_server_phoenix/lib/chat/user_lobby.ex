@@ -27,7 +27,8 @@ defmodule Chat.UserLobby do
   end
 
   def get_user_lobbies(user_id) do
-    Chat.Repo.get_by!(Chat.UserLobby, [user_id: user_id])
+    Chat.Repo.all(Chat.UserLobby)
+      |> Enum.filter(fn ul -> ul.user_id == user_id end)
   end
 
   def delete_lobby(%Chat.UserLobby{} = user_lobby) do

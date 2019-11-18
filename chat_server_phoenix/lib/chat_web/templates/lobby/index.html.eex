@@ -1,18 +1,9 @@
 <!-- The list of messages will appear here: -->
 <ul id='msg-list' class='row' style='list-style: none; min-height:200px; padding: 10px;'></ul>
 
-<div class="row">
-  <div class="col-xs-3">
-    <input type="text" id="name" class="form-control" placeholder="Your Name" autofocus>
-  </div>
-  <div class="col-xs-9">
-    <input type="text" id="msg" class="form-control" placeholder="Your Message">
-  </div>
-</div>
-
 <%= form_for @conn, Routes.lobby_path(@conn, :index), fn f -> %>
   <div class="form-group">
-    <%= select f, :lobby_id, @lobbies, class: "form-control" %>
-    <%= error_tag f, :lobby_id %>
+    <%= select f, :lobbies, @lobbies, class: "form-control" %>
+    <%= error_tag f, :lobbies %>
   </div>
 <% end %>
