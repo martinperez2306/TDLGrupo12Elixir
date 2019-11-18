@@ -3,9 +3,10 @@ defmodule Chat.UserLobby do
   import Ecto.Changeset
   @derive {Jason.Encoder, only: [:user_id, :lobby_id]}
 
+  @primary_key false
   schema "user_lobby" do
-    field :user_id, :id
-    field :lobby_id, :id
+    field :user_id, :id, primary_key: true
+    field :lobby_id, :id, primary_key: true
 
     timestamps()
   end

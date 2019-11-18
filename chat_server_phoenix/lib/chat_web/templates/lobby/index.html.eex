@@ -9,3 +9,10 @@
     <input type="text" id="msg" class="form-control" placeholder="Your Message">
   </div>
 </div>
+
+<%= form_for @conn, Routes.lobby_path(@conn, :index), fn f -> %>
+  <div class="form-group">
+    <%= select f, :lobby_id, @lobbies, class: "form-control" %>
+    <%= error_tag f, :lobby_id %>
+  </div>
+<% end %>

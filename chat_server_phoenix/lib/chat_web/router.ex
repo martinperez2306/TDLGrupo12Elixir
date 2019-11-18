@@ -12,6 +12,11 @@ defmodule ChatWeb.Router do
     plug(:accepts, ["json"])
   end
 
+  ### Utils Commands
+  ###
+  ### mix phx.routes
+  ### List of route paths for controllers and static / dinamyc content or logic
+
   scope "/", ChatWeb do
     pipe_through(:browser)
 
@@ -24,6 +29,12 @@ defmodule ChatWeb.Router do
     get("/", LoginController, :index)
     post("/", LoginController, :login)
     put("/", LoginController, :create)
+  end
+
+  scope "/users", ChatWeb do
+    pipe_through(:browser)
+
+    get("/", UserController, :index)
   end
 
   scope "/lobbies", ChatWeb do
