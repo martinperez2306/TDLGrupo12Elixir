@@ -26,3 +26,7 @@ Para nuestro proyecto de Chat usaremos el manejador de proyecto de Mix
   * DEV: Nuestro para trabajar y compilar
   * TEST: Compila los codigos para pruebas y luego ejecutar
   * PROD: Para la muestra
+
+## Contenido estatico
+  * Dejar en assets los contenidos
+  * Ejecutar mix phx.digest assets -o priv/static para aplicar los cambios
