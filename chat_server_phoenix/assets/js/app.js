@@ -42,7 +42,7 @@ function login(email, pass){
     'url': 'http://localhost:4000/login',
     'Content-Type': 'application/javascript',
     'dataType': 'json',
-    'data': JSON.stringfy(user),
+    'data': JSON.stringify(user),
     'success': function(response)
      {
       getId(response);
