@@ -1,6 +1,7 @@
 defmodule Chat.UserLobby do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query, only: [from: 2]
   @derive {Jason.Encoder, only: [:user_id, :lobby_id]}
 
   @primary_key false
@@ -27,8 +28,10 @@ defmodule Chat.UserLobby do
   end
 
   def get_user_lobbies(user_id) do
+    query = from ul in "user_lobby",
+          where: ul.user_id == type(^user_id, :integer),
+          select: ul
     Chat.Repo.all(Chat.UserLobby)
-      |> Enum.filter(fn ul -> ul.user_id == user_id end)
   end
 
   def delete_lobby(%Chat.UserLobby{} = user_lobby) do
