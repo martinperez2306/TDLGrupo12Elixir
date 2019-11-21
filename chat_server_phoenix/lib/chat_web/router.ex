@@ -41,6 +41,7 @@ defmodule ChatWeb.Router do
     pipe_through(:browser)
 
     get("/", LobbyController, :index)
+    get("/:id", LobbyController, :show)
   end
 
   scope "/api", ChatWeb do
