@@ -15,14 +15,14 @@ defmodule Chat.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:name, :message])
-    |> validate_required([:name, :message])
+    |> cast(attrs, [:name, :message, :lobby_id])
+    |> validate_required([:name, :message, :lobby_id])
   end
 
   def get_messages(lobby_id) do
-    query = from m in "messages",
-      where: m.lobby_id == type(^lobby_id, :integer),
-      select: {m.id, m.message, m.name, m.lobby_id}
+    query = from m in Chat.Message,
+      where: m.lobby_id == type(^lobby_id, :id),
+      select: m
     Chat.Repo.all(query)
   end
 end

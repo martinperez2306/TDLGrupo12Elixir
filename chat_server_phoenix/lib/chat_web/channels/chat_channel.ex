@@ -1,20 +1,21 @@
-defmodule ChatWeb.RoomChannel do
+defmodule ChatWeb.ChatChannel do
   use ChatWeb, :channel
 
-  def join("room:lobby", payload, socket) do
+  def join("chat:" <> room, payload, socket) do
     if authorized?(payload) do
-      send(self(), :after_join)
+      send(self(), {:after_join, room})
       {:ok, socket}
     else
       {:error, %{reason: "unauthorized"}}
     end
   end
 
-  def handle_info(:after_join, socket) do
-    Chat.Message.get_messages()
+  def handle_info({:after_join, room}, socket) do
+    Chat.Message.get_messages(room)
     |> Enum.each(fn msg -> push(socket, "shout", %{
         name: msg.name,
         message: msg.message,
+        id: msg.id
       }) end)
     {:noreply, socket} # :noreply
   end
@@ -27,19 +28,15 @@ defmodule ChatWeb.RoomChannel do
   end
 
   # It is also common to receive messages from the client and
-  # broadcast to everyone in the current topic (room:lobby).
+  # broadcast to everyone in the current topic (chat_room:lobby).
   def handle_in("shout", payload, socket) do
-    Chat.Message.changeset(%Chat.Message{}, payload) |> Chat.Repo.insert 
-    broadcast socket, "shout", payload
+    {:ok, msg} =
+      Chat.Message.changeset(%Chat.Message{}, payload)
+      |> Chat.Repo.insert()
+
+    broadcast(socket, "shout", Map.put_new(payload, :id, msg.id))
     {:noreply, socket}
   end
-
-  def handle_in("loggin", payload, socket) do
-    broadcast socket, "loggin", payload
-    IO.puts(payload)
-    {:noreply, socket}
-  end
-
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do

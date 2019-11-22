@@ -6,7 +6,10 @@
 
 import socket from "./socket"
 
-var channel = socket.channel('room:lobby', {}); // connect to chat "room"
+//var channel = socket.channel('room:lobby', {}); // connect to chat "room"
+var path = window.location.pathname.split('/')
+var room = path[path.length -1]
+var channel = socket.channel('chat:' + room, {})
 channel.on('shout', function (payload) { // listen to the 'shout' event
   if (document.getElementById(payload.id) == null) { // check if message exists.
     var li = document.createElement("li"); // creaet new list item DOM element
@@ -38,7 +41,6 @@ function sanitise(str) {
   return str.replace(reg, (match)=>(map[match]));
 }
 
-
 channel.join() // join the channel.
   .receive("ok", resp => { console.log("Joined chat!", resp) })
 
@@ -52,7 +54,8 @@ msg.addEventListener('keypress', function (event) {
     console.log(msg.value)
     channel.push('shout', { // send the message to the server
       name: sanitise(name.value), // get value of "name" of person sending
-      message: sanitise(msg.value) // get message text (value) from msg input
+      message: sanitise(msg.value), // get message text (value) from msg input
+      lobby_id: room // Payload have the lobby id
     });
     msg.value = '';         // reset the message input field for next message.
   }
