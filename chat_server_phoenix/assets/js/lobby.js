@@ -7,13 +7,13 @@ function createLobby(){
 
 $.ajax({
   'type': 'POST',
-  'url': 'http://localhost:4000/login',
+  'url': 'http://localhost:4000/lobbies',
   'Content-Type': 'application/json',
   'dataType': 'json',
   'data': JSON.stringify(lobby_id),
   'success': function(response)
    {
-    getId(response);
+    updateLobbies(response);
    },
    'error': function(jqXHR, textStatus, errorThrown)
    {
@@ -22,25 +22,10 @@ $.ajax({
 });
 }
 
-function joinLobby(lobby_id){
-  var user_lobby = {
-    user_id:0,
-    lobby_id:lobby_id
-  }
+function updateLobbies(){
+  //Aca hacer el update del select o dropdown de lobbies
+}
 
-  $.ajax({
-    'type': 'POST',
-    'url': 'http://localhost:4000/login',
-    'Content-Type': 'application/json',
-    'dataType': 'json',
-    'data': JSON.stringify(lobby_id),
-    'success': function(response)
-     {
-      getId(response);
-     },
-     'error': function(jqXHR, textStatus, errorThrown)
-     {
-         console.log('Error on saving appointment:', jqXHR, textStatus, errorThrown);
-     }
-  });
+function joinLobby(lobby_id){
+  window.location.href="/lobbies/"+lobby_id
 }

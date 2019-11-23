@@ -1,13 +1,17 @@
 <!-- The list of lobbies will appear here: -->
 
-<%= form_for @conn, Routes.lobby_path(@conn, :index), fn f -> %>
-  <div class="form-group">
-    <%= select f, :lobbies, @lobbies, class: "form-control" %>
-    <%= error_tag f, :lobbies %>
-  </div>
-<% end %>
+<ul id="lobby-list"
+    style="list-style: none; min-height:200px; border: 1px solid #e5e5e5; margin: 10px; padding: 10px;">
+  <%= for l <- @lobbies do %>
+    <li id="<%= l.id %>"><b> <%= l.name %> </b>
+      <button id="btnJoin-<%= l.id %>"
+        type="button" class="btn btn-info btn-lg"
+        onclick="joinLobby(<%= l.id %>)">join</button>
+    </li>
+  <% end %>
+</ul>
 
-<button id="btnLobby" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#createLobbyModal">Nueva Sala</button>
+<button id="btnModal" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#createLobbyModal">Nueva Sala</button>
 
 <!-- Modal for create lobby-->
 <div id="createLobbyModal" class="modal fade" role="dialog">

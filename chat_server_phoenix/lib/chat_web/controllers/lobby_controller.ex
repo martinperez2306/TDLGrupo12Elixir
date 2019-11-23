@@ -18,8 +18,6 @@ defmodule ChatWeb.LobbyController do
   ##Show only the enabled chat lobbies to FrontEnd
   def index(conn, _params) do
     lobbies = Chat.Lobby.get_lobbies(true)
-    #Enum of lobbies must be %{lobby_name, lobby_id}
-    lobbies = Enum.map(lobbies, &{&1.name, &1.id})
     render(conn, "index.html", lobbies: lobbies)
   end
 
