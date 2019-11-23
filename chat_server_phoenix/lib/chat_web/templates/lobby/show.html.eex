@@ -15,4 +15,4 @@
   </div>
 </div>
 
-<script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/lobby.js") %>"></script>
+<script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/chat.js") %>"></script>

@@ -22,7 +22,7 @@ defmodule ChatWeb.UserSocket do
   def connect(%{"token" => token}, socket, _connect_info) do
     case Phoenix.Token.verify(socket, "user salt", token, max_age: 86400) do
       {:ok, user_id} ->
-        socket = assign(socket, :user, Repo.get!(User, user_id))
+        socket = assign(socket, :user, Chat.Repo.get!(Chat.User, user_id))
         {:ok, socket}
       {:error, _} ->
         :error

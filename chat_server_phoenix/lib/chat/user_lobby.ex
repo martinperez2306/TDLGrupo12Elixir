@@ -31,11 +31,11 @@ defmodule Chat.UserLobby do
     query = from ul in "user_lobby",
           where: ul.user_id == type(^user_id, :integer),
           select: ul
-    Chat.Repo.all(Chat.UserLobby)
+    Chat.Repo.all(query)
   end
 
   def delete_lobby(%Chat.UserLobby{} = user_lobby) do
-   Caht.Repo.delete(user_lobby)
+    Chat.Repo.delete(user_lobby)
   end
 
 end

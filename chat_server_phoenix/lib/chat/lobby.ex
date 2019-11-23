@@ -1,6 +1,7 @@
 defmodule Chat.Lobby do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query, only: [from: 2]
   @derive {Jason.Encoder, only: [:id, :enable, :name]}
 
   schema "lobbies" do
@@ -19,6 +20,13 @@ defmodule Chat.Lobby do
 
   def get_lobbies() do
     Chat.Repo.all(Chat.Lobby)
+  end
+
+  def get_lobbies(enable) do
+    query = from l in Chat.Lobby,
+      where: l.enable == type(^enable, :boolean),
+      select: l
+    Chat.Repo.all(query)
   end
 
   def get_lobby(id) do

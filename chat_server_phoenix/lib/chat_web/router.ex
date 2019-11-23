@@ -31,31 +31,21 @@ defmodule ChatWeb.Router do
     put("/", LoginController, :create)
   end
 
-  scope "/users", ChatWeb do
-    pipe_through(:browser)
-
-    get("/", UserController, :index)
-  end
-
   scope "/lobbies", ChatWeb do
     pipe_through(:browser)
 
     get("/", LobbyController, :index)
     get("/:id", LobbyController, :show)
+    post("/", LobbyController, :create)
+    delete("/:id", LobbyController, :delete)
   end
 
   scope "/api", ChatWeb do
     pipe_through(:api)
-    get("/lobbies", LobbyApiController, :index)
-    post("/lobbies", LobbyApiController, :create)
-    delete("/lobbies/:id", LobbyApiController, :delete)
-    #Move create user logic to this controller
+    #User Api Example
     #get "/users", UserController, :index
     #get "/users/:id", UserController, :show
     #post "/user/:id", UserController, :create
-    get("/users/:id/lobbies", UserApiController, :lobbies)
-    post("/users/:user_id/lobbies", UserApiController, :create_lobby)
-    delete("/users/:user_id/lobbies/:lobby_id", UserApiController, :delete_lobby)
   end
 
 end
