@@ -51,4 +51,6 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/login.js") %>"></script>
 	

@@ -30,7 +30,7 @@ function login(email, pass){
     'url': 'http://localhost:4000/login',
     'Content-Type': 'application/javascript',
     'dataType': 'json',
-    'data': JSON.stringify(user),
+    'data': user,
     'success': function(response)
      {
       getId(response);

@@ -10,29 +10,33 @@
     </li>
   <% end %>
 </ul>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<button id="btnModal" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#createLobbyModal">Nueva Sala</button>
+<button id="btnModal" onclick="document.getElementById('modal').style.display='block'" class="w3-button w3-black">Nueva Sala</button>
 
-<!-- Modal for create lobby-->
-<div id="createLobbyModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <div id="modal" class="w3-modal">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-teal"> 
+        <span onclick="document.getElementById('id01').style.display='none'" 
+        class="w3-button w3-display-topright">&times;</span>
         <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Elija el nombre de la Sala</p>
-        <input type="text" id="lobbyName" class="form-control" placeholder="Nombre de la Sala">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="createLobby()">Aceptar</button>
-      </div>
-    </div>
+      </header>
 
+      <div class="w3-container">
+        <br>
+        <p class="txt2" >Elija el nombre de la Sala</p>
+        <br>
+        <input type="text" id="lobbyName" class="input100" placeholder="Nombre de la Sala">
+        <br>
+      </div>
+
+      <footer class="w3-container w3-teal">
+        <br>
+        <button type="button" class="login100-form-btn" data-dismiss="modal" onclick="createLobby()">Aceptar</button>
+        <br>
+      </footer>
+      
+    </div>
   </div>
-</div>
 
 <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/lobby.js") %>"></script>
