@@ -10,7 +10,7 @@ $.ajax({
   'url': 'http://localhost:4000/lobbies',
   'Content-Type': 'application/json',
   'dataType': 'json',
-  'data': JSON.stringify(lobby_id),
+  'data': lobby,
   'success': function(response)
    {
     updateLobbies(response);
@@ -23,9 +23,23 @@ $.ajax({
 }
 
 function updateLobbies(){
-  //Aca hacer el update del select o dropdown de lobbies
+  location.reload();
 }
 
 function joinLobby(lobby_id){
   window.location.href="/lobbies/"+lobby_id
 }
+
+var modalButton = document.getElementById('createBtn'); // the button inside modal
+modalButton.addEventListener('click', function () {
+  createLobby();
+});
+
+// add event listener to all joins buttons
+var joinButtons = document.querySelectorAll('button[id^=btnJoin-]');
+joinButtons.forEach(btn => {
+  btn.addEventListener('click', function () {
+    joinLobby(btn.parentNode.getAttribute("id"));
+  });
+  
+});

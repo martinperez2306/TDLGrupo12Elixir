@@ -1,29 +1,29 @@
-let btn = document.getElementById('loginBtn');
+let btn = document.getElementById('loginBtn'); //login btn
 
 function getId(response) {
-    $.ajax({
-      'type': 'GET',
-      'url': 'http://localhost:4000/lobbies',
-      'Content-Type': 'application/javascript',
-      'data': {
-        "id" : response.id,
-      },
-      'success': function(response)
-       {
-        $("html").html(response);
-       },
-       'error': function(jqXHR, textStatus, errorThrown)
-       {
-          console.log('Error on saving appointment:', jqXHR, textStatus, errorThrown);
-       }
-    });
+  $.ajax({
+    'type': 'GET',
+    'url': 'http://localhost:4000/lobbies',
+    'Content-Type': 'application/javascript',
+    'data': {
+      "id": response.id,
+    },
+    'success': function (response) {
+      window.location.replace("http://localhost:4000/lobbies");
+    },
+    'error': function (jqXHR, textStatus, errorThrown) {
+      console.log('Error on saving appointment:', jqXHR, textStatus, errorThrown);
+    }
+  });
 };
 
-function login(email, pass){
-    var user = {
-        email: email,
-        pass: pass,
-    };
+
+// post user and email
+function login(email, pass) {
+  var user = {
+    email: email,
+    pass: pass,
+  };
 
   $.ajax({
     'type': 'POST',
@@ -31,22 +31,22 @@ function login(email, pass){
     'Content-Type': 'application/javascript',
     'dataType': 'json',
     'data': user,
-    'success': function(response)
-     {
+    'success': function (response) {
       getId(response);
-     },
-     'error': function(jqXHR, textStatus, errorThrown)
-     {
-         console.log('Error on saving appointment:', jqXHR, textStatus, errorThrown);
-     }
- });
+    },
+    'error': function (jqXHR, textStatus, errorThrown) {
+      console.log('Error on saving appointment:', jqXHR, textStatus, errorThrown);
+    }
+  });
 };
 
+
+// listen event to click
 btn.addEventListener('click', function () {
-  let pass = document.getElementById('pass');        // list of messages.
-  let email = document.getElementById('email');
-  if (pass.value.length > 0 && email.value.length > 0) { // don't sent empty msg.
-   login(email.value, pass.value);
+  let pass = document.getElementById('pass');           // value of password
+  let email = document.getElementById('email');         // value of mail
+  if (pass.value.length > 0 && email.value.length > 0) { // check if both are not empty
+    login(email.value, pass.value);
   }
 
 });

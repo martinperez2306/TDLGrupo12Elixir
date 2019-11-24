@@ -1,7 +1,7 @@
 import socket from "./socket"
 
 var path = window.location.pathname.split('/')
-var room = path[path.length -1]
+var room = path[path.length - 1]
 var channel = socket.channel('chat:' + room, {}) // connect to chat with lobby id
 channel.on('shout', function (payload) { // listen to the 'shout' event
   if (document.getElementById(payload.id) == null) { // check if message exists.
@@ -23,15 +23,15 @@ channel.on('shout', function (payload) { // listen to the 'shout' event
  */
 function sanitise(str) {
   const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#x27;',
-      "/": '&#x2F;',
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    "/": '&#x2F;',
   };
   const reg = /[&<>"'/]/ig;
-  return str.replace(reg, (match)=>(map[match]));
+  return str.replace(reg, (match) => (map[match]));
 }
 
 channel.join() // join the channel.
@@ -40,10 +40,23 @@ channel.join() // join the channel.
 var ul = document.getElementById('msg-list');        // list of messages.
 var name = document.getElementById('name');          // name of message sender
 var msg = document.getElementById('msg');            // message input field
+var sendBtn = document.getElementById('sendBtn');    // send btn
 
 // "listen" for the [Enter] keypress event to send a message:
 msg.addEventListener('keypress', function (event) {
-  if (event.keyCode == 13 && msg.value.length > 0) { // don't sent empty msg.
+  if (event.keyCode == 13) {
+    send();
+  }
+});
+
+// "listen" for the click event to send a message:
+sendBtn.addEventListener('click', function () {
+  send();
+});
+
+// funciton to send message and name
+function send() {
+  if (msg.value.length > 0) { // don't sent empty msg.
     console.log(msg.value)
     channel.push('shout', { // send the message to the server
       name: sanitise(name.value), // get value of "name" of person sending
@@ -52,4 +65,4 @@ msg.addEventListener('keypress', function (event) {
     });
     msg.value = '';         // reset the message input field for next message.
   }
-});
+}
