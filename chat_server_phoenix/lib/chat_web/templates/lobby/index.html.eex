@@ -1,42 +1,53 @@
-<!-- The list of lobbies will appear here: -->
+<div >
+	<div class="container-login100">
+		<div class="wrap-login100">
+			<div>
+				<!-- The list of lobbies will appear here: -->
+        <ul id="lobby-list">
+          <%= for l <- @lobbies do %>
+            <li id="<%= l.id %>"><b> <%= l.name %> </b>
+              <button id="btnJoin-<%= l.id %>"
+                type="button" class="btn btn-info btn-lg joinBtn"
+                onclick="joinLobby(<%= l.id %>)">join</button>
+            </li>
+          <% end %>
+        </ul>
+			</div>
 
-<ul id="lobby-list"
-    style="list-style: none; min-height:200px; border: 1px solid #e5e5e5; margin: 10px; padding: 10px;">
-  <%= for l <- @lobbies do %>
-    <li id="<%= l.id %>"><b> <%= l.name %> </b>
-      <button id="btnJoin-<%= l.id %>"
-        type="button" class="btn btn-info btn-lg"
-        onclick="joinLobby(<%= l.id %>)">join</button>
-    </li>
-  <% end %>
-</ul>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+			<div class="login100-form validate-form form">
 
-<button id="btnModal" onclick="document.getElementById('modal').style.display='block'" class="w3-button w3-black">Nueva Sala</button>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <button id="btnModal" onclick="document.getElementById('modal').style.display='block'" class="login100-form-btn">Nueva Sala</button>
+        <div id="modal" class="w3-modal">
+          <div class="w3-modal-content w3-card-4">
+            <header class="w3-container w3-teal"> 
+              <span onclick="document.getElementById('modal').style.display='none'" 
+              class="w3-button w3-display-topright">&times;</span>
+              <h4 class="modal-title">Modal Header</h4>
+            </header>
 
-  <div id="modal" class="w3-modal">
-    <div class="w3-modal-content w3-card-4">
-      <header class="w3-container w3-teal"> 
-        <span onclick="document.getElementById('id01').style.display='none'" 
-        class="w3-button w3-display-topright">&times;</span>
-        <h4 class="modal-title">Modal Header</h4>
-      </header>
+            <div class="w3-container">
+              <br>
+              <p class="txt2" >Elija el nombre de la Sala</p>
+              <br>
+              <input type="text" id="lobbyName" class="input100" placeholder="Nombre de la Sala">
+              <br>
+            </div>
 
-      <div class="w3-container">
-        <br>
-        <p class="txt2" >Elija el nombre de la Sala</p>
-        <br>
-        <input type="text" id="lobbyName" class="input100" placeholder="Nombre de la Sala">
-        <br>
-      </div>
+            <footer class="w3-container w3-teal">
+              <br>
+              <button type="button" id="createBtn" class="login100-form-btn" data-dismiss="modal">Aceptar</button>
+              <br>
+            </footer>
 
-      <footer class="w3-container w3-teal">
-        <br>
-        <button type="button" class="login100-form-btn" data-dismiss="modal" onclick="createLobby()">Aceptar</button>
-        <br>
-      </footer>
-      
-    </div>
-  </div>
+          </div>
+        </div>
+
+		</div>
+	</div>
+
+</div>
+
+
 
 <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/lobby.js") %>"></script>
