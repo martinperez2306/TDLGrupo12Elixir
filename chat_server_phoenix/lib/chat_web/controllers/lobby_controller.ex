@@ -23,7 +23,8 @@ defmodule ChatWeb.LobbyController do
 
   def show(conn, %{"id" => lobby_id}) do
     messages = Chat.Message.get_messages(lobby_id)
-    render(conn, "show.html", messages: messages)
+    lobby = Chat.Lobby.get_lobby(lobby_id)
+    render(conn, "show.html", messages: messages, lobby: lobby)
   end
 
   def create(conn, params) do

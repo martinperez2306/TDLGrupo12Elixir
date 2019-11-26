@@ -794,3 +794,15 @@ header nav a {
   background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
   background: linear-gradient(-135deg, #c850c0, #4158d0);
 }
+
+
+#lobby-list{
+  list-style: none; min-height:200px;
+  border: 1px solid #e5e5e5;
+  margin: 10px;
+  padding: 10px;
+}
+
+.joinItem{
+  padding: 5px;
+}
