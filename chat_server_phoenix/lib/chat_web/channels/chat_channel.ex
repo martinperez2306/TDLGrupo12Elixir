@@ -12,7 +12,6 @@ defmodule ChatWeb.ChatChannel do
 
   def handle_info({:after_join, room}, socket) do
     Chat.Supervisor.start_room(room)
-
     {:noreply, socket} # :noreply
   end
 
@@ -26,11 +25,14 @@ defmodule ChatWeb.ChatChannel do
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (chat_room:lobby).
   def handle_in("shout", payload, socket) do
-    Chat.Server.add_message(payload)
-
+    # Cast the paylod to struct with atoms
     payload_casted = for {key, val} <- payload, into: %{}, do: {String.to_atom(key), val}
-    [head | tail] = Chat.Server.get_messages(payload_casted.lobby_id)
 
+    # Add message to lobby
+    Chat.Server.add_message(payload, payload_casted.lobby_id)
+
+    # Get last message (with id) and broadcast to everyone
+    [head | tail] = Chat.Server.get_messages(payload_casted.lobby_id)
     broadcast(socket, "shout", Map.put_new(payload, :id, head.id))
 
     {:noreply, socket}
