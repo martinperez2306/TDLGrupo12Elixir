@@ -11,7 +11,11 @@ x = 12;
 x = "Hello";
 IO.puts(x);
 
-
+#Los operadores de listas nunca modifican la lista existente.
+#Concatenar o eliminar elementos de una lista devuelve una nueva lista.
+#Decimos que las estructuras de datos de Elixir son inmutables.
+#Una ventaja de la inmutabilidad es que conduce a un código más claro.
+#Puede pasar libremente los datos con la garantía de que nadie los mutará en la memoria, solo los transformará.
 list = [1,2,true,3];
 listASCII = [104,101,108, 108,111];
 IO.puts(listASCII);
