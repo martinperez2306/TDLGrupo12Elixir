@@ -22,9 +22,10 @@ defmodule ChatWeb.LobbyController do
   end
 
   def show(conn, %{"id" => lobby_id}) do
+    Chat.Supervisor.start_room(lobby_id)
     lobby = Chat.Lobby.get_lobby(lobby_id)
-    Chat.Supervisor.start_room(lobby.name)
-    messages = Chat.Server.get_messages(lobby.name)
+    messages = Chat.Server.get_messages(lobby_id)
+    IO.inspect(messages)
     render(conn, "show.html", messages: messages, lobby: lobby)
   end
 
