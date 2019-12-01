@@ -17,11 +17,11 @@ defmodule Chat.Server do
   def add_message(payload, lobby_id) do
     # And the `GenServer` callbacks will accept this tuple the
     # same way it accepts a pid or an atom.
-    GenServer.cast(via_tuple(lobby_id), {:add_message, payload})
+    GenServer.call(via_tuple(lobby_id), {:add_message, payload})
   end
 
   def get_messages(room_id) do
-    GenServer.call(via_tuple(room_id), :get_messages)
+    GenServer.call(via_tuple(room_id), {:get_messages, room_id})
   end
 
   defp via_tuple(room_id) do
@@ -35,22 +35,22 @@ defmodule Chat.Server do
     {:ok, messages}
   end
 
-  def handle_cast({:add_message, new_message}, messages) do
+  def handle_call({:add_message, new_message}, _from, messages) do
     # Insert in database
-    # {:ok, msg} = Chat.Message.changeset(%Chat.Message{}, new_message) |> Chat.Repo.insert()
-
-    # Cast te new_message received
-    message = for {key, val} <- new_message, into: %{}, do: {String.to_atom(key), val}
+    {:ok, msg} = Chat.Message.changeset(%Chat.Message{}, new_message) |> Chat.Repo.insert()
 
     case messages do
-      [] -> {:noreply, [Map.put_new(message, :id, 0)]}
-      [head] -> {:noreply, [Map.put_new(message, :id, head.id + 1) | messages]}
-      [head | tail] -> {:noreply, [Map.put_new(message, :id, head.id + 1) | messages]}
+      [] -> {:reply, msg, [msg]}
+      [head] -> {:reply, msg, [msg | messages]}
+      [head | _tail] -> {:reply, msg, [msg | messages]}
     end
   end
 
-  def handle_call(:get_messages, _from, messages) do
-    # Chat.Message.get_messages(Integer.to_string(messages.lobby_id))
-    {:reply, messages, messages}
+  def handle_call({:get_messages, room_id}, _from, messages) do
+    case messages do
+      [] -> {:reply, Chat.Message.get_messages(room_id), Chat.Message.get_messages(room_id)}
+      [head] -> {:reply, messages, messages}
+      [head | tail] -> {:reply, messages, messages}
+    end
   end
 end

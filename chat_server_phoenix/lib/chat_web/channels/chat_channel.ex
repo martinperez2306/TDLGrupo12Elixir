@@ -29,11 +29,10 @@ defmodule ChatWeb.ChatChannel do
     payload_casted = for {key, val} <- payload, into: %{}, do: {String.to_atom(key), val}
 
     # Add message to lobby
-    Chat.Server.add_message(payload, payload_casted.lobby_id)
+    msg = Chat.Server.add_message(payload, payload_casted.lobby_id)
 
     # Get last message (with id) and broadcast to everyone
-    [head | tail] = Chat.Server.get_messages(payload_casted.lobby_id)
-    broadcast(socket, "shout", Map.put_new(payload, :id, head.id))
+    broadcast(socket, "shout", Map.put_new(payload, :id, msg.id))
 
     {:noreply, socket}
   end
