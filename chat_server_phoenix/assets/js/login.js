@@ -32,6 +32,7 @@ function login(email, pass) {
     'dataType': 'json',
     'data': user,
     'success': function (response) {
+      localStorage.setItem('user', email);
       getId(response);
     },
     'error': function (jqXHR, textStatus, errorThrown) {

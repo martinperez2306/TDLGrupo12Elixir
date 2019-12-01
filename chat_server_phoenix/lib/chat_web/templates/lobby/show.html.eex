@@ -17,13 +17,21 @@
 					Estas conectado en la sala "<%= @lobby.name %>"
 				</span>
 				
+				<span class="txt2">
+					Tu nombre
+				</span>
+					
 				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-            <input type="text" id="name" class="input100 form-control" placeholder="Your Name" autofocus>
-						<span class="focus-input100"></span>
+            	<input disabled type="text" id="name" class="input100 form-control" value="<%= @user %>" autofocus>
+					<span class="focus-input100"></span>
 				</div>
 
+				<span class="txt2"	>
+					Ingresa un mensaje
+				</span>
+
 				<div class="wrap-input100 validate-input" data-validate = "Password is required">
-          <input type="text" id="msg" class="input100 form-control" placeholder="Your Message">
+          		<input type="text" id="msg" class="input100 form-control" placeholder="Your Message">
 					<span class="focus-input100"></span>
 				</div>
 				
