@@ -6,15 +6,19 @@ defmodule Chat.Registry do
     # just so we can reference it in the other functions.
     GenServer.start_link(__MODULE__, nil, name: :registry)
   end
+
   def whereis_name(room_name) do
     GenServer.call(:registry, {:whereis_name, room_name})
   end
+
   def register_name(room_name, pid) do
     GenServer.call(:registry, {:register_name, room_name, pid})
   end
+
   def unregister_name(room_name) do
     GenServer.cast(:registry, {:unregister_name, room_name})
   end
+
   def send(room_name, message) do
     # If we try to send a message to a process
     # that is not registered, we return a tuple in the format
@@ -24,6 +28,7 @@ defmodule Chat.Registry do
     case whereis_name(room_name) do
       :undefined ->
         {:badarg, {room_name, message}}
+
       pid ->
         Kernel.send(pid, message)
         pid
@@ -34,11 +39,13 @@ defmodule Chat.Registry do
   def init(_) do
     # We will use a simple Map to store our processes in
     # the format %{"room name" => pid}
-    {:ok, Map.new}
+    {:ok, Map.new()}
   end
+
   def handle_call({:whereis_name, room_name}, _from, state) do
     {:reply, Map.get(state, room_name, :undefined), state}
   end
+
   def handle_call({:register_name, room_name, pid}, _from, state) do
     # Registering a name is just a matter of putting it in our Map.
     # Our response tuple include a `:no` or `:yes` indicating if
@@ -46,10 +53,12 @@ defmodule Chat.Registry do
     case Map.get(state, room_name) do
       nil ->
         {:reply, :yes, Map.put(state, room_name, pid)}
+
       _ ->
         {:reply, :no, state}
     end
   end
+
   def handle_cast({:unregister_name, room_name}, state) do
     # And unregistering is as simple as deleting an entry
     # from our Map
