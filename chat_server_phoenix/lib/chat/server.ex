@@ -39,6 +39,7 @@ defmodule Chat.Server do
     # Insert in database
     {:ok, msg} = Chat.Message.changeset(%Chat.Message{}, new_message) |> Chat.Repo.insert()
 
+    # Reply te new message and update our internal state
     case messages do
       [] -> {:reply, msg, [msg]}
       [head] -> {:reply, msg, [msg | messages]}
@@ -48,7 +49,9 @@ defmodule Chat.Server do
 
   def handle_call({:get_messages, room_id}, _from, messages) do
     case messages do
-      [] -> {:reply, Chat.Message.get_messages(room_id), Chat.Message.get_messages(room_id)}
+      [] ->
+        last_messages = Chat.Message.get_messages(room_id)
+        {:reply, last_messages ,last_messages}
       [head] -> {:reply, messages, messages}
       [head | tail] -> {:reply, messages, messages}
     end
