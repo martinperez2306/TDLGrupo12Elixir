@@ -1,4 +1,5 @@
 var lobbyName = document.getElementById('lobbyName'); // name of Lobby
+var user = localStorage.getItem('user'); // name of user
 
 function createLobby(){
   var lobby = {
@@ -27,7 +28,8 @@ function updateLobbies(){
 }
 
 function joinLobby(lobby_id){
-  window.location.href="/lobbies/"+lobby_id
+  localStorage.setItem('lobbyId', lobby_id);
+  window.location.href="/lobbies/"+lobby_id+"/"+user
 }
 
 var modalButton = document.getElementById('createBtn'); // the button inside modal
