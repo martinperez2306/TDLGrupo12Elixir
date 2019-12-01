@@ -1,0 +1,65 @@
+=====================================================
+BASICO
+
+Todo el código se ejecuta dentro de los procesos
+Aislados
+Se ejecutan concurrente
+Comunicación mediante mensajes
+Programas distribuidos
+Tolerancia a fallos
+
+Los procesos de Elixir no deben confundirse con los procesos del sistema operativo.
+Los procesos en Elixir son extremadamente livianos en términos de memoria y CPU (incluso en comparación con los subprocesos que se usan en muchos otros lenguajes de programación). Debido a esto,
+No es raro tener decenas o incluso cientos de miles de procesos ejecutándose simultáneamente.
+
+
+====================================================
+COMUNICACION
+
+Cuando se envía un mensaje a un proceso, el mensaje se almacena en el buzón del proceso.
+El bloque de recepción / 1 atraviesa el buzón de proceso actual buscando un mensaje que coincida con cualquiera de los patrones dados.
+recibir / 1 admite guardias y muchas cláusulas, como el caso / 2.
+
+El proceso que envía el mensaje no se bloquea en send / 2, coloca el mensaje en el buzón del destinatario y continúa.
+En particular, un proceso puede enviarse mensajes a sí mismo.
+
+
+==============================================
+LINKS Y FALLOS
+
+Debido a que los procesos están vinculados, ahora vemos un mensaje que dice que el proceso padre, que es el proceso de shell,
+ha recibido una señal de SALIDA de otro proceso que hace que el shell finalice.
+IEx detecta esta situación e inicia una nueva sesión de shell.
+
+La vinculación también se puede hacer manualmente llamando a Process.link/1.
+Recomendamos que eche un vistazo al módulo Proceso para ver otras funciones proporcionadas por los procesos.
+
+Los procesos y los enlaces juegan un papel importante al construir sistemas tolerantes a fallas.
+Los procesos de elixir están aislados y no comparten nada de forma predeterminada.
+Por lo tanto, una falla en un proceso nunca bloqueará o corromperá el estado de otro proceso.
+Sin embargo, los enlaces permiten que los procesos establezcan una relación en caso de falla.
+A menudo vinculamos nuestros procesos con supervisores que detectarán cuándo un proceso muere y comenzarán un nuevo proceso en su lugar.
+
+Mientras que otros idiomas requerirían que detectemos / manejemos excepciones,
+en Elixir estamos de acuerdo con dejar que los procesos fallen porque esperamos
+que los supervisores reinicien nuestros sistemas correctamente.
+¡"Fallar rápido" es una filosofía común al escribir el software Elixir!
+
+spawn / 1 y spawn_link / 1 son las primitivas básicas para crear procesos en Elixir.
+Aunque los hemos usado exclusivamente hasta ahora, la mayoría de las veces vamos a usar abstracciones que se acumulan sobre ellos.
+Veamos la más común, llamada tareas.
+
+
+================================================
+ESTADO
+
+Hasta ahora no hemos hablado del estado en esta guía.
+Si está creando una aplicación que requiere estado, por ejemplo, para mantener la configuración de su aplicación,
+o necesita analizar un archivo y guardarlo en la memoria, ¿dónde lo guardaría?
+
+Los procesos son la respuesta más común a esta pregunta.
+Podemos escribir procesos que se repiten infinitamente, mantienen el estado y envían y reciben mensajes.
+Como ejemplo, vamos a escribir un módulo que inicie nuevos procesos que funcionen como un almacén de valores clave en un archivo llamado STATE.EXS
+
+Observe cómo el proceso mantiene un estado y podemos obtener y actualizar este estado enviando los mensajes del proceso.
+De hecho, cualquier proceso que conozca el pid anterior podrá enviarle mensajes y manipular el estado.
