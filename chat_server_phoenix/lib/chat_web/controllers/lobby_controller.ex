@@ -21,10 +21,13 @@ defmodule ChatWeb.LobbyController do
     render(conn, "index.html", lobbies: lobbies)
   end
 
-  def show(conn, %{"id" => lobby_id}) do
-    messages = Chat.Message.get_messages(lobby_id)
+  def show(conn,%{"id" => lobby_id, "user" => user}) do
+
+    Chat.Supervisor.start_room(lobby_id)
     lobby = Chat.Lobby.get_lobby(lobby_id)
-    render(conn, "show.html", messages: messages, lobby: lobby)
+    messages = Chat.Server.get_messages(lobby_id)
+    IO.inspect(messages)
+    render(conn, "show.html", messages: Enum.reverse(messages), lobby: lobby, user: user)
   end
 
   def create(conn, params) do

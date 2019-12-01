@@ -36,7 +36,7 @@ defmodule ChatWeb.Router do
     pipe_through(:browser)
 
     get("/", LobbyController, :index)
-    get("/:id", LobbyController, :show)
+    get("/:id/:user", LobbyController, :show)
     post("/", LobbyController, :create)
     delete("/:id", LobbyController, :delete)
   end

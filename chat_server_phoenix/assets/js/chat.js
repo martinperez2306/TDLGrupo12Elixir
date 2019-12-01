@@ -1,7 +1,7 @@
 import socket from "./socket"
 
-var path = window.location.pathname.split('/')
-var room = path[path.length - 1]
+var path = window.location.pathname.split('/');
+var room = localStorage.getItem('lobbyId');
 var channel = socket.channel('chat:' + room, {}) // connect to chat with lobby id
 channel.on('shout', function (payload) { // listen to the 'shout' event
   if (document.getElementById(payload.id) == null) { // check if message exists.
