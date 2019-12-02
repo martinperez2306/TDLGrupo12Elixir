@@ -20,10 +20,10 @@
         <button id="btnModal" onclick="document.getElementById('modal').style.display='block'" class="login100-form-btn">Nueva Sala</button>
         <div id="modal" class="w3-modal">
           <div class="w3-modal-content w3-card-4">
-            <header class="w3-container w3-teal"> 
-              <span onclick="document.getElementById('modal').style.display='none'" 
+            <header class="w3-container w3-teal">
+              <span onclick="document.getElementById('modal').style.display='none'"
               class="w3-button w3-display-topright">&times;</span>
-              <h4 class="modal-title">Modal Header</h4>
+              <h4 class="modal-title">Nueva Sala</h4>
             </header>
 
             <div class="w3-container">
