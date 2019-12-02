@@ -21,3 +21,13 @@ list4 = [a: 0] ++ list3
 
 hd(list4)
 tl(list4)
+
+#Mapas
+#iex> %{} = %{:a => 1, 2 => :b}
+#%{2 => :b, :a => 1}
+#iex> %{:a => a} = %{:a => 1, 2 => :b}
+#%{2 => :b, :a => 1}
+#iex> a
+#1
+#iex> %{:c => c} = %{:a => 1, 2 => :b}
+#** (MatchError) no match of right hand side value: %{2 => :b, :a => 1}
