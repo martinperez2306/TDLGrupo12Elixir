@@ -3,13 +3,13 @@ let btn = document.getElementById('loginBtn'); //login btn
 function getId(response) {
   $.ajax({
     'type': 'GET',
-    'url': 'http://localhost:4000/lobbies',
-    'Content-Type': 'application/javascript',
+    'url': 'http://' + host + '/lobbies',
+    'Content-Type': 'application/json',
     'data': {
       "id": response.id,
     },
     'success': function (response) {
-      window.location.replace("http://localhost:4000/lobbies");
+      window.location.replace("http://" + host +"/lobbies");
     },
     'error': function (jqXHR, textStatus, errorThrown) {
       console.log('Error on saving appointment:', jqXHR, textStatus, errorThrown);
@@ -19,6 +19,7 @@ function getId(response) {
 
 
 // post user and email
+var host = location.host;
 function login(email, pass) {
   var user = {
     email: email,
@@ -27,8 +28,8 @@ function login(email, pass) {
 
   $.ajax({
     'type': 'POST',
-    'url': 'http://localhost:4000/login',
-    'Content-Type': 'application/javascript',
+    'url': 'http://' + host + '/login',
+    'Content-Type': 'application/json',
     'dataType': 'json',
     'data': user,
     'success': function (response) {

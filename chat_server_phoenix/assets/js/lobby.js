@@ -8,7 +8,7 @@ function createLobby(){
 
 $.ajax({
   'type': 'POST',
-  'url': 'http://localhost:4000/lobbies',
+  'url': 'http://' + host + '/lobbies',
   'Content-Type': 'application/json',
   'dataType': 'json',
   'data': lobby,
@@ -43,5 +43,5 @@ joinButtons.forEach(btn => {
   btn.addEventListener('click', function () {
     joinLobby(btn.parentNode.getAttribute("id"));
   });
-  
+
 });
