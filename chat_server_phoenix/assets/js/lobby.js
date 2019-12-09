@@ -1,5 +1,6 @@
 var lobbyName = document.getElementById('lobbyName'); // name of Lobby
 var user = localStorage.getItem('user'); // name of user
+var host = location.host;
 
 function createLobby(){
   var lobby = {
